@@ -23,7 +23,8 @@ const regInfo = ref ({
   tel: ""
 })
 
-function formaReg() {
+function formaReg() { 
+  // функция для формы регистрации на боулинг
  Errorname.value = "";
  Errortelef.value = "";
  Errordate.value = "";
@@ -66,7 +67,8 @@ function formaReg() {
    <label> Телефон <input type="tel" v-model="tel"></label><br>
    <label> Дата <input type="date"></label><br>
    <label> Время <input type="time"></label><br>
-   <button @click="formaReg(name, tel)">Отправить</button>
+   <button @click="formaReg(name, tel)">Отправить</button> 
+   <!-- отправляем функцию -->
 
 </div>
 
