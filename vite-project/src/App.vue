@@ -87,6 +87,9 @@ function formaReg() {
   border: black 1px solid;
   text-align: center;
   justify-content: center;
+  height: 100px;
+  padding: 50px;
+
 }
 .logo {
   height: 6em;
@@ -100,4 +103,12 @@ function formaReg() {
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
+
+input{
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}
+
+
 </style>
