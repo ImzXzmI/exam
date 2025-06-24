@@ -1,12 +1,11 @@
 <script setup>
-import {ref } from "vue";
+import { ref } from "vue";
 
 // константы 
 const name = ref(''); 
 const tel = ref('');
 // const date = ref('');
 // const time = ref('');
-
 
 // константы для ошибок
 const Errorname = ref('');
@@ -21,63 +20,66 @@ const ShowInfo = ref(false);
 const regInfo = ref ({ 
   name: "",
   tel: ""
-})
+});
 
 function formaReg() { 
   // функция для формы регистрации на боулинг
- Errorname.value = "";
- Errortelef.value = "";
- Errordate.value = "";
- Errortime.value = "";
+  Errorname.value = "";
+  Errortelef.value = "";
+  // Errordate.value = "";
+  // Errortime.value = "";
 
- let hasError = false;
- if(!name.value.trin()){
-  Errorname.value = "введите имя"
-  let hasError = true;
- }else if ([!А-Яа-я\s]+$/.test(name.value)) {
-  Errorname.value = "Имя на кириллице"
-  let hasError = true;
- }
- if(telef.value.length < 11){
-  Errortelef.value = "Телефон минимум 11 символов";
-  let hasError = true;
- }
+  let hasError = false;
 
- if(!hasError){
-  sucMassage.value = "Заказ оформлен. ${name.value}";
-
-  regInfo.value = {
-      name: name.value;
-      tel: tel.value;
-
+  if (!name.value.trim()) {
+    Errorname.value = "Введите имя";
+    hasError = true; // исправлено
+  } else if (!/^[А-Яа-я\s]+$/.test(name.value)) {
+    Errorname.value = "Имя на кириллице";
+    hasError = true; // исправлено
   }
-  ShowInfo.value = true;
- }
   
-}
+  if (tel.value.length < 11) {
+    Errortelef.value = "Телефон минимум 11 символов";
+    hasError = true; // исправлено
+  }
 
+  if (!hasError) {
+    sucMassage.value = `Заказ оформлен. ${name.value}`; // исправлено
+
+    regInfo.value = {
+      name: name.value,
+      tel: tel.value
+    };
+    ShowInfo.value = true;
+  }
+}
 </script>
 
 <template>
 <h1>ФОРМА БРОНИРОВАНИЯ</h1>
 
 <div class="form"> 
-  <!-- делаем форму -->
-   <label> Имя <input type="text" v-model="name"></label><br>
-   <label> Телефон <input type="tel" v-model="tel"></label><br>
-   <label> Дата <input type="date"></label><br>
-   <label> Время <input type="time"></label><br>
-   <button @click="formaReg(name, tel)">Отправить</button> 
-   <!-- отправляем функцию -->
-
+  <label> Имя <input type="text" v-model="name"></label><br>
+  <span style="color:red;">{{ Errorname }}</span><br> 
+  <label> Телефон <input type="tel" v-model="tel"></label><br>
+  <span style="color:red;">{{ Errortelef }}</span><br> 
+  <label> Дата <input type="date"></label><br>
+  <label> Время <input type="time"></label><br>
+  <button @click="formaReg">Отправить</button> 
+  <!-- вызов функции по кнопке -->
 </div>
+
+<br>
 
 <div class="footer">
   Контакт: +79119829122
   Все права защищены 
 </div>
 
+<div v-if="ShowInfo">{{ sucMassage }}</div> 
 </template>
+
 
 <style scoped>
 .footer{
